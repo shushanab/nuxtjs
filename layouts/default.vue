@@ -1,20 +1,22 @@
 <template>
-  <v-app dark>
+  <v-app class="main__layout">
     <v-main>
       <v-container>
         <Nuxt />
       </v-container>
     </v-main>
 
-    <v-footer :absolute="!fixed" app>
-      <span>&copy; {{ new Date().getFullYear() }}</span>
-    </v-footer>
+    <Footer />
   </v-app>
 </template>
 
 <script>
+import Footer from "/components/Footer";
 export default {
   name: "DefaultLayout",
+  components: {
+    Footer,
+  },
   data() {
     return {
       fixed: false,
@@ -24,3 +26,11 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+.main__layout {
+  background-color: #eeeeee;
+  max-width: 1280px;
+  max-height: 850px;
+  margin: 0 auto;
+}
+</style>

@@ -1,18 +1,19 @@
 <template>
   <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      <v-card>
-        <v-card-title class="headline"> Tast Title </v-card-title>
-        <v-card-text>
-          <p>Task Description</p>
-        </v-card-text>
-      </v-card>
-    </v-col>
+    <Header />
+    <Content />
   </v-row>
 </template>
 
 <script>
+import Header from "/components/Header";
+import Content from "/components/Content";
+
 export default {
   name: "IndexPage",
+  components: {
+    Header,
+    Content,
+  },
 };
 </script>
