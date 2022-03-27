@@ -2,14 +2,18 @@
   <v-col cols="12" sm="8" md="6">
     <v-card class="content elevation-0">
       <v-card-text>
-        <p>Task Description</p>
+        <Search />
       </v-card-text>
     </v-card>
   </v-col>
 </template>
 <script>
+import Search from "/components/Search";
 export default {
   name: "Content",
+  components: {
+    Search,
+  },
   data() {
     return {};
   },
