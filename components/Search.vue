@@ -1,5 +1,5 @@
 <template>
-  <div class="search">
+  <div class="search mr-2">
     <v-text-field
       v-model.trim="search"
       color="primary"
@@ -31,7 +31,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .search__input {
-  width: 524px;
+  width: 520px;
 
   background: #fafafa;
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
