@@ -77,7 +77,9 @@ export default {
   build: {
   },
 
+  target: 'static',
   router: {
-    routeNameSplitter: '/'
+    routeNameSplitter: '/',
+    base: 'nuxtjs'
   }
 }
