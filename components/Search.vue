@@ -59,10 +59,7 @@ export default {
 <style lang="scss" scoped>
 .search__input {
   width: 520px;
-
   border-radius: 2px;
-
-  font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
   font-size: 24px;

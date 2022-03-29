@@ -90,7 +90,6 @@ export default {
 }
 
 .footer__time {
-  font-family: "Roboto";
   font-style: normal;
   font-weight: 700;
   font-size: 12px;

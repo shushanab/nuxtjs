@@ -121,7 +121,6 @@ $user-margin: 134px;
 
 .user_card__name {
   margin-top: 0;
-  font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
   font-size: 22px;
@@ -133,7 +132,6 @@ $user-margin: 134px;
 }
 
 .user_card__email {
-  font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -152,7 +150,6 @@ $user-margin: 134px;
 }
 
 .user_card__title {
-  font-family: "Roboto";
   font-style: normal;
   font-weight: 700;
   font-size: 14px;
@@ -162,7 +159,6 @@ $user-margin: 134px;
 }
 
 .user_card__address {
-  font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
   font-size: 14px;

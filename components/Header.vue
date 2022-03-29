@@ -9,7 +9,7 @@
           class="mr-4 title_bar__img"
           @click="titleBarIconClick(icon.title)"
           :alt="icon.title"
-          :src="'/' + icon.title + '.svg'"
+          :src="'/nuxtjs/' + icon.title + '.svg'"
         />
       </template>
       <span>{{ icon.title }}</span>
