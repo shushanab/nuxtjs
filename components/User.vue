@@ -78,14 +78,12 @@ $user-margin: 134px;
   box-sizing: border-box;
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
   border-radius: 3px;
-  border-style: inset;
-  border-top: 1px solid #fafafa;
+
   margin-top: 1px;
 }
 
 .user_card__active {
-  border: 1px solid #4765ff !important;
-  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
+  box-shadow: 0px 0px 2px rgba(0, 0, 255, 1), 0px 2px 2px rgba(0, 0, 255, 0.5) !important;
   left: 0;
   top: 0;
   bottom: 1px;
@@ -96,8 +94,8 @@ $user-margin: 134px;
   width: $user-margin;
   background: #bbbbbb;
   border-radius: 3px 0 0 3px;
-  left: 0px;
-  top: 0px;
+  left: 0;
+  top: 0;
   bottom: 0;
 }
 
