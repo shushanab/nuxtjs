@@ -13,7 +13,6 @@
       <v-avatar
         v-else
         color="grey lighten-2"
-        size="128"
         tile
         class="user_card__avatar user_card__avatar_initials"
       >
@@ -66,6 +65,7 @@ export default {
 
     userClick(user) {
       this.$emit("user:click", user);
+      this.$forceUpdate();
     },
   },
 };
@@ -75,10 +75,12 @@ $user-margin: 134px;
 .user_card {
   height: $user-margin;
   margin-right: 16px;
-
   box-sizing: border-box;
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
   border-radius: 3px;
+  border-style: inset;
+  border-top: 1px solid #fafafa;
+  margin-top: 1px;
 }
 
 .user_card__active {
@@ -86,6 +88,7 @@ $user-margin: 134px;
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
   left: 0;
   top: 0;
+  bottom: 1px;
 }
 
 .user_card__avatar {
@@ -93,15 +96,20 @@ $user-margin: 134px;
   width: $user-margin;
   background: #bbbbbb;
   border-radius: 3px 0 0 3px;
-  left: -1px;
-  top: -1px;
+  left: 0px;
+  top: 0px;
   bottom: 0;
 }
 
 .user_card__avatar_initials {
-  color: #4765ff;
-  font-size: 24px;
-  font-weight: 700;
+  color: #009688;
+  font-size: 26px;
+  font-weight: 600;
+  width: $user-margin !important;
+  height: $user-margin !important;
+  border-radius: 3px 0 0 3px;
+  left: 0;
+  top: 0;
 }
 
 .user_card__info {
@@ -119,7 +127,7 @@ $user-margin: 134px;
   font-size: 22px;
   line-height: 32px;
   white-space: nowrap;
-  padding-right: 2px;
+  padding-right: 1px;
 
   color: rgba(0, 0, 0, 0.87);
 }

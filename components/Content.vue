@@ -7,17 +7,9 @@
           v-on:searching="searchByQuery"
           :count="filteredElements.length"
         />
+
         <v-layout row v-if="!loaded">
-          <v-layout row class="mt-10 align-center">
-            <v-col cols="12" class="text-center">
-              <v-progress-circular
-                indeterminate
-                color="accent"
-                size="80"
-                width="6"
-              ></v-progress-circular>
-            </v-col>
-          </v-layout>
+          <Loader />
         </v-layout>
 
         <v-list class="content__list mt-4 mb-0 pb-0" v-else>
@@ -44,6 +36,7 @@
 <script>
 import Search from "/components/Search";
 import User from "/components/User";
+import Loader from "/components/Loader";
 import NoResult from "/components/NoResult";
 
 import axios from "axios";
@@ -54,6 +47,7 @@ export default {
     Search,
     User,
     NoResult,
+    Loader,
   },
   data() {
     return {
@@ -77,13 +71,12 @@ export default {
         );
         this.loaded = true;
         this.users = result.data;
+        this.users[1].avatar = "";
         this.users.forEach((user) => {
           user.selected = false;
         });
 
-        this.usersCleanData = result.data;
-
-        return result.data;
+        this.usersCleanData = Object.assign([], this.users);
       } catch (error) {
         console.log(error);
         return null;
@@ -108,7 +101,6 @@ export default {
       let itemIndex = this.filteredElements.indexOf(user);
       user.selected = !user.selected;
       this.filteredElements.splice(itemIndex, 1, user);
-      //   this.filteredElements = JSON.parse(JSON.stringify(this.users));
     },
   },
 
