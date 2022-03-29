@@ -22,23 +22,23 @@
 
       <div class="user_card__info">
         <div class="user_name__row ml-6">
-          <span class="user_card__name">
-            {{ user.name }}
-          </span>
+          <span class="user_card__name" v-html="user.name"> </span>
 
-          <span class="user_card__email"> {{ user.email }} </span>
+          <span class="user_card__email" v-html="user.email"> </span>
         </div>
 
-        <p class="user_card__title ml-6 mt-1 mb-0">{{ user.title }}</p>
-        <span class="user_card__address ml-6 mt-1 pt-0">
-          {{ createFullAddress(user.address, user.city) }}
+        <p class="user_card__title ml-6 mt-1 mb-0" v-html="user.title"></p>
+        <span
+          class="user_card__address ml-6 mt-1 pt-0"
+          v-html="user.address + ' , ' + user.city"
+        >
         </span>
 
-        <v-divider v-show="!user.selected"></v-divider>
+        <v-divider v-show="!user.selected" class="ml-2"></v-divider>
       </div>
     </v-card-text>
     <v-card-actions class="user_card__actions">
-      <v-btn text color="accent" class="simple" @click="userClick(user)">
+      <v-btn text color="accent" @click="userClick(user)">
         <span v-if="user.selected">skip selection</span>
         <span v-else>mark as suitable</span>
       </v-btn>
@@ -64,10 +64,6 @@ export default {
       return initials.toUpperCase();
     },
 
-    createFullAddress(address, city) {
-      return `${address}, ${city}`;
-    },
-
     userClick(user) {
       this.$emit("user:click", user);
     },
@@ -75,9 +71,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+$user-margin: 134px;
 .user_card {
-  height: 134px;
-  // width: 100%;
+  height: $user-margin;
   margin-right: 16px;
 
   box-sizing: border-box;
@@ -94,8 +90,7 @@ export default {
 
 .user_card__avatar {
   position: absolute;
-  width: 134px;
-  // height: 136px;
+  width: $user-margin;
   background: #bbbbbb;
   border-radius: 3px 0 0 3px;
   left: -1px;
@@ -111,7 +106,9 @@ export default {
 
 .user_card__info {
   position: absolute;
-  left: 134px;
+  left: $user-margin;
+  width: calc(100% - 134px);
+  padding-right: 8px;
 }
 
 .user_card__name {
@@ -121,6 +118,8 @@ export default {
   font-weight: 400;
   font-size: 22px;
   line-height: 32px;
+  white-space: nowrap;
+  padding-right: 2px;
 
   color: rgba(0, 0, 0, 0.87);
 }
@@ -132,14 +131,16 @@ export default {
   font-size: 14px;
   line-height: 16px;
   text-align: end;
+  word-break: break-word;
+  text-align: end;
+  padding-left: 2px;
 
   color: rgba(0, 0, 0, 0.54);
 }
 
 .user_name__row {
-  justify-content: flex-end;
-  float: right;
-  // background: red;
+  display: flex;
+  justify-content: space-between;
 }
 
 .user_card__title {
@@ -163,8 +164,8 @@ export default {
 }
 
 .user_card__actions {
-  left: 134px;
-  top: 80px;
+  left: 140px;
+  top: 88px;
   position: absolute;
 }
 </style>

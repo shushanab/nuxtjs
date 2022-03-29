@@ -1,8 +1,11 @@
 <template>
   <v-col cols="12" sm="8" md="6">
-    <v-card class="content elevation-0 mb-0 pb-0">
-      <v-card-text class="pb-0">
-        <Search v-on:searching="searchByQuery" />
+    <v-card class="content elevation-0">
+      <v-card-text>
+        <Search
+          v-on:searching="searchByQuery"
+          :count="filteredElements.length"
+        />
         <v-layout row v-if="!loaded">
           <v-layout row class="mt-10 align-center">
             <v-col cols="12" class="text-center">
@@ -17,13 +20,21 @@
         </v-layout>
 
         <v-list class="content__list mt-4 mb-0 pb-0" v-else>
-          <v-virtual-scroll :items="users" height="524" item-height="156">
+          <v-virtual-scroll
+            v-if="filteredElements.length"
+            height="500"
+            item-height="156"
+            :items="filteredElements"
+          >
             <template v-slot:default="{ item }">
               <div :key="item.email" class="mb-8">
                 <User :user="item" v-on:user:click="toggleSelected" />
               </div>
             </template>
           </v-virtual-scroll>
+          <div v-else>
+            <NoResult :description="computedNoResultDescription" />
+          </div>
         </v-list>
       </v-card-text>
     </v-card>
@@ -32,6 +43,7 @@
 <script>
 import Search from "/components/Search";
 import User from "/components/User";
+import NoResult from "/components/NoResult";
 
 import axios from "axios";
 
@@ -40,11 +52,14 @@ export default {
   components: {
     Search,
     User,
+    NoResult,
   },
   data() {
     return {
       users: [],
+      usersCleanData: [],
       loaded: false,
+      search: "",
     };
   },
   mounted() {
@@ -56,12 +71,13 @@ export default {
         const result = await axios.get(
           "https://gist.githubusercontent.com/allaud/093aa499998b7843bb10b44ea6ea02dc/raw/c400744999bf4b308f67807729a6635ced0c8644/users.json"
         );
-        console.log(result.data);
         this.loaded = true;
         this.users = result.data;
         this.users.forEach((user) => {
           user.selected = false;
         });
+
+        this.usersCleanData = result.data;
 
         return result.data;
       } catch (error) {
@@ -69,16 +85,63 @@ export default {
         return null;
       }
     },
+
+    highlight(query, string) {
+      if (!query) {
+        return string;
+      }
+
+      return string.replace(new RegExp(query, "gi"), (match) => {
+        return `<span class="highlightText">${match}</span>`;
+      });
+    },
+
     searchByQuery($event) {
-      console.log($event);
+      this.search = $event;
     },
 
     toggleSelected(user) {
-      console.log("selected user", user);
-      let itemIndex = this.users.indexOf(user);
+      let itemIndex = this.filteredElements.indexOf(user);
       user.selected = !user.selected;
-      this.users.splice(itemIndex, 1, user);
-      this.users = JSON.parse(JSON.stringify(this.users));
+      this.filteredElements.splice(itemIndex, 1, user);
+      //   this.filteredElements = JSON.parse(JSON.stringify(this.users));
+    },
+  },
+
+  computed: {
+    computedNoResultDescription() {
+      return `Sorry :( <br /> Your search <b>${this.search}</b> did not match any user info. <br />Please try again!`;
+    },
+
+    filteredElements() {
+      if (this.search) {
+        this.users = JSON.parse(JSON.stringify(this.usersCleanData));
+
+        return this.users.reduce((acc, curr) => {
+          const inSensitiveSearch = this.search.toLowerCase();
+          const subStrContain =
+            curr.name.toLowerCase().includes(inSensitiveSearch) > 0 ||
+            curr.email.toLowerCase().includes(inSensitiveSearch) > 0 ||
+            curr.title.toLowerCase().includes(inSensitiveSearch) > 0 ||
+            curr.city.toLowerCase().includes(inSensitiveSearch) > 0 ||
+            curr.address.toLowerCase().includes(inSensitiveSearch) > 0
+              ? curr
+              : "";
+
+          if (subStrContain) {
+            curr.name = this.highlight(this.search, curr.name);
+            curr.email = this.highlight(this.search, curr.email);
+            curr.title = this.highlight(this.search, curr.title);
+            curr.city = this.highlight(this.search, curr.city);
+            curr.address = this.highlight(this.search, curr.address);
+            acc.push({
+              ...curr,
+            });
+          }
+
+          return acc;
+        }, []);
+      } else return this.usersCleanData;
     },
   },
 };
@@ -90,6 +153,10 @@ export default {
   height: 642px;
   background: #ffffff;
   border-radius: 0;
+}
+
+.highlightText {
+  background: yellow;
 }
 
 .v-virtual-scroll {
