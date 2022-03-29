@@ -21,9 +21,7 @@ import _ from "lodash";
 export default {
   name: "search",
   data() {
-    return {
-      search: "",
-    };
+    return {};
   },
 
   methods: {
@@ -36,11 +34,24 @@ export default {
     computedHint() {
       return `Found ${this.count} users.`;
     },
+
+    search: {
+      get() {
+        return this.value;
+      },
+      set(value) {
+        this.$emit("input", value);
+      },
+    },
   },
   props: {
     count: {
       type: Number,
       default: 0,
+    },
+    value: {
+      type: String,
+      default: "",
     },
   },
 };

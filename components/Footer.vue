@@ -7,7 +7,7 @@
           v-on="on"
           class="ml-1 mr-6 footer__apps_icon"
           :alt="icon.title"
-          :src="icon.title + '.svg'"
+          :src="'/' + icon.title + '.svg'"
           @click="footerAppClick(icon.title)"
         />
       </template>
@@ -25,7 +25,7 @@
           v-on="on"
           class="ml-6 title_bar__img"
           :alt="icon.title"
-          :src="icon.title + '.svg'"
+          :src="'/' + icon.title + '.svg'"
           @click="footerAppClick(icon.title)"
         />
       </template>

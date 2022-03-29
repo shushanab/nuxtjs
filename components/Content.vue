@@ -3,6 +3,7 @@
     <v-card class="content elevation-0">
       <v-card-text>
         <Search
+          v-model="search"
           v-on:searching="searchByQuery"
           :count="filteredElements.length"
         />
@@ -64,6 +65,9 @@ export default {
   },
   mounted() {
     this.getUsers();
+    if (this.$route.params.searchQuery) {
+      this.search = this.$route.params.searchQuery;
+    }
   },
   methods: {
     async getUsers() {
