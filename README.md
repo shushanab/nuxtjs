@@ -15,6 +15,9 @@ $ npm run start
 
 # generate static project
 $ npm run generate
+
+# deploy to the github.io
+$ npm run deploy
 ```
 
 ## Development Specifications
