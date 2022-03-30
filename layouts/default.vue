@@ -29,8 +29,8 @@ export default {
 <style lang="scss" scoped>
 .main__layout {
   background-color: #eeeeee;
-  max-width: 1280px;
-  max-height: 850px;
+  width: 1280px;
+  height: 850px;
   margin: 0 auto;
 }
 </style>

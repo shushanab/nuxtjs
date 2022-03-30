@@ -1,37 +1,35 @@
 <template>
-  <v-col cols="12" sm="8" md="6">
-    <v-card class="content elevation-0">
-      <v-card-text>
-        <Search
-          v-model="search"
-          v-on:searching="searchByQuery"
-          :count="filteredElements.length"
-        />
+  <v-card class="content elevation-0">
+    <v-card-text>
+      <Search
+        v-model="search"
+        v-on:searching="searchByQuery"
+        :count="filteredElements.length"
+      />
 
-        <v-layout row v-if="!loaded">
-          <Loader />
-        </v-layout>
+      <v-layout row v-if="!loaded">
+        <Loader />
+      </v-layout>
 
-        <v-list class="content__list mt-4 mb-0 pb-0" v-else>
-          <v-virtual-scroll
-            v-if="filteredElements.length"
-            height="500"
-            item-height="156"
-            :items="filteredElements"
-          >
-            <template v-slot:default="{ item }">
-              <div :key="item.email" class="mb-8">
-                <User :user="item" v-on:user:click="toggleSelected" />
-              </div>
-            </template>
-          </v-virtual-scroll>
-          <div v-else>
-            <NoResult :description="computedNoResultDescription" />
-          </div>
-        </v-list>
-      </v-card-text>
-    </v-card>
-  </v-col>
+      <v-list class="content__list mt-4 mb-0 pb-0" v-else>
+        <v-virtual-scroll
+          v-if="filteredElements.length"
+          height="500"
+          item-height="156"
+          :items="filteredElements"
+        >
+          <template v-slot:default="{ item }">
+            <div :key="item.email" class="mb-8">
+              <User :user="item" v-on:user:click="toggleSelected" />
+            </div>
+          </template>
+        </v-virtual-scroll>
+        <div v-else>
+          <NoResult :description="computedNoResultDescription" />
+        </div>
+      </v-list>
+    </v-card-text>
+  </v-card>
 </template>
 <script>
 import Search from "/components/Search";

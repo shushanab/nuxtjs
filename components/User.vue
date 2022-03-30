@@ -38,8 +38,9 @@
     </v-card-text>
     <v-card-actions class="user_card__actions">
       <v-btn text color="accent" @click="userClick(user)">
-        <span v-if="user.selected">skip selection</span>
-        <span v-else>mark as suitable</span>
+        <span
+          v-text="user.selected ? 'skip selection' : 'mark as suitable'"
+        ></span>
       </v-btn>
     </v-card-actions>
   </v-card>

@@ -27,6 +27,7 @@ export default {
   methods: {
     searching: _.debounce(function ($event) {
       this.$emit("searching", $event);
+      this.$router.push(this.search.length ? `/search/${this.search}` : "/");
     }, 500),
   },
 
