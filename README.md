@@ -31,3 +31,6 @@ $ npm run generate
 - Show total count of filtered users.
 - Handle no result case.
 - Implemented 404 not found page.
+
+## Demo
+https://shushanab.github.io/nuxtjs/
