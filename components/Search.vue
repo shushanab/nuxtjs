@@ -27,7 +27,7 @@ export default {
   methods: {
     searching: _.debounce(function ($event) {
       this.$emit("searching", $event);
-    }, 1000),
+    }, 500),
   },
 
   computed: {

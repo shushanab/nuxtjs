@@ -80,6 +80,9 @@ export default {
   target: 'static',
   router: {
     routeNameSplitter: '/',
-    base: '/nuxtjs/'
+    base: '/nuxtjs/',
+  },
+  generate: {
+    crawler: true,
   }
 }
