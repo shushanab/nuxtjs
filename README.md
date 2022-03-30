@@ -17,14 +17,14 @@ $ npm run start
 $ npm run generate
 ```
 
-## Development specifications
+## Development Specifications
 
-### Main feautures
+### Main Features
 - Show all profile cards by default.
 - On typing filter in realtime, highlight the matching string
 - Search should be stateful (using browser url e.g. `/search/Boris`)
 
-### Bonus feautures
+### Bonus Features
 - Implemented loading state on data get.
 - Debounced searching functionality.
 - Show user's initials if the avatar does not exist.
